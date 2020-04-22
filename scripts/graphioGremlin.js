@@ -93,6 +93,7 @@ var graphioGremlin = (function(){
 		// Preprocess query
 		let input_string = $('#search_value').val();
 		let input_field = $('#search_field').val();
+		let id_field = $('#id_field').val();
 		let label_field = $('#label_field').val();
 		let limit_field = $('#limit_field').val();
         let search_type = $('#search_type').val();
@@ -102,6 +103,9 @@ var graphioGremlin = (function(){
 		if (filtered_string.length>50) filtered_string = filtered_string.substring(0,50); // limit string length
 		// Translate to Gremlin query
 		let has_str = "";
+		if (id_field !== "") {
+			has_str = ".hasId('" + id_field + "')";
+		}
 		if (label_field !== "") {
 			has_str = ".hasLabel('" + label_field + "')";
 		}
@@ -169,6 +173,10 @@ var graphioGremlin = (function(){
 	function click_query(d) {
 		// Query sent to the server when a node is clicked
 		//
+		var limit_traverse = $('#limit_traverse_field').val();
+		if (limit_traverse === "" || limit_traverse < 0) {
+			limit_traverse = node_limit_traverse;
+		}
         var edge_filter = $('#edge_filter').val();
         var communication_method = $('#communication_method').val();
 		var id = d.id;
@@ -176,7 +184,7 @@ var graphioGremlin = (function(){
 			id = '"'+id+'"';
 		}
 		// Gremlin query
-		var gremlin_query_nodes = 'nodes = ' + traversal_source + '.V('+id+').as("node").both('+(edge_filter?'"'+edge_filter+'"':'')+').as("node").select(all,"node").unfold()'
+		var gremlin_query_nodes = 'nodes = ' + traversal_source + '.V('+id+').as("node").both('+(edge_filter?'"'+edge_filter+'"':'')+').limit('+limit_traverse+').as("node").select(all,"node").unfold()'
         // Variant depending on the Gremlin version
         if (communication_method == "GraphSON3_4") { 
         	// Version 3.4
@@ -191,7 +199,7 @@ var graphioGremlin = (function(){
 		// 'inject' is necessary in case of an isolated node ('both' would lead to an empty answer)
 		console.log('Query for the node and its neigbhors')
 		console.log(gremlin_query_nodes)
-		var gremlin_query_edges = "edges = " + traversal_source + ".V("+id+").bothE("+(edge_filter?"'"+edge_filter+"'":"")+")";
+		var gremlin_query_edges = "edges = " + traversal_source + ".V("+id+").bothE("+(edge_filter?"'"+edge_filter+"'":"")+").limit("+limit_traverse+")";
 		var gremlin_query = gremlin_query_nodes+'\n'+gremlin_query_edges+'\n'+'[nodes.toList(),edges.toList()]'
 		// while busy, show we're doing something in the messageArea.
 		$('#messageArea').html('<h3>(loading)</h3>');

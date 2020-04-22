@@ -54,6 +54,10 @@
 			<div class="nav container" id="search_bar">
 				<div class="nav inputs_container_top">
 					<div class="nav input_unit_container">
+						<label for="id_field">Node id:</label>
+						<input name="id_field" id="id_field" value="" />
+					</div>
+					<div class="nav input_unit_container">
 						<label for="label_field">Node label:</label>
 						<input name="label_field" id="label_field" value="" />
 					</div>
@@ -86,6 +90,10 @@
 					<div class="nav input_unit_container">
 						<label class="nav input_label" for="edge_filter">Traverse by edge:</label>
 						<input name="edge_filter" id="edge_filter" value="" />
+					</div>
+					<div class="nav input_unit_container">
+						<label for="limit_traverse_field">Traverse limit:</label>
+						<input name="limit_traverse_field" id="limit_traverse_field" value="10" min="1" max="1000" type="number"/>
 					</div>
 					<div class="nav input_unit_container">
 						<label class="nav input_label" for="nbLayers">Nb of layers</label>

@@ -30,10 +30,10 @@ var infobox = (function(){
 	// Public function
 	function create(label_graph,label_graphElem){
         var graph_bar = d3.select(label_graph);
-        graph_bar.append("h2").text("Graph Info");
-        graph_bar.append("h4").text("Limited to the first " + limit_graphinfo_request + " nodes and edges");
+        // graph_bar.append("h2").text("Graph Info");
+        // graph_bar.append("h4").text("Limited to the first " + limit_graphinfo_request + " nodes and edges");
 		_table_Graphinfo = graph_bar.append("table").attr("id","tableGraph");
-		init_table(_table_Graphinfo,["Type","Count"]);
+		// init_table(_table_Graphinfo,["Type","Count"]);
 
 		var graphElem_bar = d3.select(label_graphElem);
         graphElem_bar.append("h2").text("Item Info");

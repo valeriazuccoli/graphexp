@@ -413,13 +413,13 @@ var graphioGremlin = (function(){
 
 		}
 		if (query_type=='graphInfo'){
-			infobox.display_graph_info(data);
+			// infobox.display_graph_info(data);
 			_node_properties = make_properties_list(data[1][0]);
 			_edge_properties = make_properties_list(data[3][0]);
 			change_nav_bar(_node_properties,_edge_properties);
+			display_color_choice(_node_properties,'nodes','Node color by:');
 			display_properties_bar(_node_properties,'nodes','Node properties:');
 			display_properties_bar(_edge_properties,'edges','Edge properties:');
-			display_color_choice(_node_properties,'nodes','Node color by:');
 		} else {
 			//console.log(data);
 			var graph = arrange_data(data);

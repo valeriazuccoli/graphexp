@@ -93,7 +93,7 @@
 					</div>
 					<div class="nav input_unit_container">
 						<label for="limit_traverse_field">Traverse limit:</label>
-						<input name="limit_traverse_field" id="limit_traverse_field" value="10" min="1" max="1000" type="number"/>
+						<input name="limit_traverse_field" id="limit_traverse_field" value="20" min="1" max="1000" type="number"/>
 					</div>
 					<div class="nav input_unit_container">
 						<label class="nav input_label" for="nbLayers">Nb of layers</label>
@@ -397,7 +397,7 @@
 
 
 	function get_prop_value(d,prop_name,item){
-		//let COMMUNICATION_METHOD = $('#communication_method').val();
+		//let COMMUNICATION_METHOD = $('#communication_method').val();		
 		if (prop_name in d.properties){
 			prop_value = d.properties[prop_name]
 			if (item=='nodes'){

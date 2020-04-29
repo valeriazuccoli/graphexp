@@ -23,7 +23,7 @@ const limit_graphinfo_request = 10000
 // Graph configuration
 const default_nb_of_layers = 3;
 const node_limit_per_request = 50;
-const node_limit_traverse = 10;
+const node_limit_traverse = 20;
 
 // Simulation
 const force_strength = -600;

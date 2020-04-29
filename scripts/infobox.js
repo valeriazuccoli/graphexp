@@ -39,8 +39,6 @@ var infobox = (function(){
         graphElem_bar.append("h2").text("Item Info");
 		_table_IDinfo = graphElem_bar.append("table").attr("id","tableIdDetails");
 		init_table(_table_IDinfo,["Key","Value"]);
-		_table_DBinfo = graphElem_bar.append("table").attr("id","tableDBDetails");
-		init_table(_table_DBinfo,["Key","Value","Property"]);
 		hide_element(label_graph);
 
 	}
@@ -100,8 +98,7 @@ var infobox = (function(){
 
 	function display_info(node_data){
 		// remove previous info		
-		_display_IDinfo(node_data)
-		_display_DBinfo(node_data);
+		_display_IDinfo(node_data);
 	}
 
 	//////////////////////
@@ -116,12 +113,7 @@ var infobox = (function(){
 	  		data_dic[id_keys[key]] = d[id_keys[key]]
 	  	}
 	  	append_keysvalues(info_table,data_dic)
-	}
 
-
-    function _display_DBinfo(d) {
-        _table_DBinfo.select("tbody").remove();
-        var info_table = _table_DBinfo.append("tbody");
 	 	if (d.type=='vertex'){
 	 		//console.log('display node data')
 	 		//console.log(d)
@@ -131,10 +123,38 @@ var infobox = (function(){
 		}
 		else {
 		 	for (var key in d.properties){
-		 		var new_info_row = info_table.append("tr");
-	 			new_info_row.append("td").text(key);
-	 			new_info_row.append("td").text(d.properties[key]);
-	 			new_info_row.append("td").text("")
+				_display_edge_properties(key,d.properties[key],info_table)
+			}
+		}
+	}
+
+	function _display_edge_properties(key,value,info_table) {
+        if (typeof value === "string" && $('#communication_method').val() =="GraphSON3_4"){
+			var new_info_row = info_table.append("tr");
+ 			new_info_row.append("td").text(key).style("font-size",_font_size);
+ 			new_info_row.append("td").text(value).style("font-size",_font_size);
+ 			new_info_row.append("td").text('').style("font-size",_font_size);
+        }
+        else
+        {
+	 		for (var subkey in value){
+				// Ignore the summary field, which is set in graphioGremlin.extract_infov3()
+				if (subkey === "summary") {
+					continue;
+				}
+	 			if ( ((typeof value[subkey] === "object") && (value[subkey] !== null)) && ('properties' in value[subkey]) ){
+	 				for (var subsubkey in value[subkey].properties){
+	 					var new_info_row = info_table.append("tr");
+	 					new_info_row.append("td").text(subkey).style("font-size",_font_size);
+	 					new_info_row.append("td").text(value[subkey].value).style("font-size",_font_size);
+	 					new_info_row.append("td").text(subsubkey + ' : '+ value[subkey].properties[subsubkey]).style("font-size",_font_size);
+	 				}
+	 			} else {
+	 				var new_info_row = info_table.append("tr");
+	 				new_info_row.append("td").text(subkey).style("font-size",_font_size);
+	 				new_info_row.append("td").text(value[subkey].value).style("font-size",_font_size);
+	 				new_info_row.append("td").text('').style("font-size",_font_size);
+	 			}
 			}
 		}
 	}

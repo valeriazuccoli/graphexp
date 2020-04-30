@@ -145,15 +145,26 @@ var infobox = (function(){
 				}
 	 			if ( ((typeof value[subkey] === "object") && (value[subkey] !== null)) && ('properties' in value[subkey]) ){
 	 				for (var subsubkey in value[subkey].properties){
+						if (_date_variables.includes(subsubkey)) {
+							var prop_value = new Date()
+							prop_value.setTime(value[subkey].properties[subsubkey])
+						} else {
+							var prop_value = value[subkey].properties[subsubkey]
+						}
 	 					var new_info_row = info_table.append("tr");
 	 					new_info_row.append("td").text(subkey).style("font-size",_font_size);
 	 					new_info_row.append("td").text(value[subkey].value).style("font-size",_font_size);
-	 					new_info_row.append("td").text(subsubkey + ' : '+ value[subkey].properties[subsubkey]).style("font-size",_font_size);
+	 					new_info_row.append("td").text(subsubkey + ' : '+ prop_value).style("font-size",_font_size);
 	 				}
 	 			} else {
+					if (_date_variables.includes(value[subkey].key)) {
+						var prop_value = new Date(value[subkey].value)
+					} else {
+						var prop_value = value[subkey].value
+					}
 	 				var new_info_row = info_table.append("tr");
 	 				new_info_row.append("td").text(subkey).style("font-size",_font_size);
-	 				new_info_row.append("td").text(value[subkey].value).style("font-size",_font_size);
+	 				new_info_row.append("td").text(prop_value).style("font-size",_font_size);
 	 				new_info_row.append("td").text('').style("font-size",_font_size);
 	 			}
 			}
@@ -162,9 +173,15 @@ var infobox = (function(){
 
 	function _display_vertex_properties(key,value,info_table) {
         if (typeof value === "string" && $('#communication_method').val() =="GraphSON3_4"){
+			if (_date_variables.includes(key)) {
+				var prop_value = new Date()
+				prop_value.setTime(value)
+			} else {
+				var prop_value = value
+			}
 			var new_info_row = info_table.append("tr");
  			new_info_row.append("td").text(key).style("font-size",_font_size);
- 			new_info_row.append("td").text(value).style("font-size",_font_size);
+ 			new_info_row.append("td").text(prop_value).style("font-size",_font_size);
  			new_info_row.append("td").text('').style("font-size",_font_size);
         }
         else
@@ -176,15 +193,27 @@ var infobox = (function(){
 				}
 	 			if ( ((typeof value[subkey] === "object") && (value[subkey] !== null)) && ('properties' in value[subkey]) ){
 	 				for (var subsubkey in value[subkey].properties){
+						if (_date_variables.includes(subsubkey)) {
+							var prop_value = new Date()
+							prop_value.setTime(value[subkey].properties[subsubkey])
+						} else {
+							var prop_value = value[subkey].properties[subsubkey]
+						}
 	 					var new_info_row = info_table.append("tr");
 	 					new_info_row.append("td").text(key).style("font-size",_font_size);
 	 					new_info_row.append("td").text(value[subkey].value).style("font-size",_font_size);
-	 					new_info_row.append("td").text(subsubkey + ' : '+ value[subkey].properties[subsubkey]).style("font-size",_font_size);
+	 					new_info_row.append("td").text(subsubkey + ' : '+ prop_value).style("font-size",_font_size);
 	 				}
 	 			} else {
+					if (_date_variables.includes(value[subkey].key)) {
+						var prop_value = new Date()
+						prop_value.setTime(value[subkey].value)
+					} else {
+						var prop_value = value[subkey].value
+					}
 	 				var new_info_row = info_table.append("tr");
 	 				new_info_row.append("td").text(key).style("font-size",_font_size);
-	 				new_info_row.append("td").text(value[subkey].value).style("font-size",_font_size);
+	 				new_info_row.append("td").text(prop_value).style("font-size",_font_size);
 	 				new_info_row.append("td").text('').style("font-size",_font_size);
 	 			}
 			}

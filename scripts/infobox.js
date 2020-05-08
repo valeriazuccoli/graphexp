@@ -25,7 +25,8 @@ var infobox = (function(){
 	var _table_Graphinfo = {};
 	var _side_image = {};
 	var _font_size = "12px";
-	var _date_variables = ['dt_var_flagbl', 'scad', 'data_conv', 'data_min_target', 'data_max_target'];
+	var _date_variables = ['dt_var_flagbl', 'data_blocco', 'scad', 'data_conv', 'data_min_target', 'data_max_target',
+	'data_min_flusso', 'data_max_flusso', 'data_min_nontarget', 'data_max_nontarget'];
 
 	////////////////////////
 	// Public function

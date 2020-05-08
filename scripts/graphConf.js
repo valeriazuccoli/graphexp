@@ -18,7 +18,7 @@ const REST_TIMEOUT = 2000
 
 // limit number of nodes and edges to query for graph info
 // (avoid overwhelming the server for large graphs)
-const limit_graphinfo_request = 10000
+const limit_graphinfo_request = 20000
 
 // Graph configuration
 const default_nb_of_layers = 3;
@@ -45,6 +45,7 @@ const node_position_y = 'graphexpy'
 // Edges
 const default_edge_stroke_width = 3;
 const default_edge_color = "#CCC";
+const edge_label_prop= "label";
 const edge_label_color = "#111";
 // Choose between curved (true) and straight edges (false).
 // If set to false, multiple edges between 2 nodes will all be straight and overlap.

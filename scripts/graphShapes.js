@@ -202,7 +202,7 @@ var graphShapes = (function(){
 			.style("text-anchor", "middle")
 			.style("pointer-events", "none")
 			.attr("startOffset", "50%")
-			.text(function (d) {return d.label});
+			.text(function (d) {return _search_for_property(edge_label_prop, d)})
 
 		// Attach the edge actions
 		attach_edge_actions(edges_deco)
@@ -212,6 +212,18 @@ var graphShapes = (function(){
 
 		return [edges_deco,edgepaths_deco,edgelabels_deco]
 
+	}
+
+	function _search_for_property(prop,edge) {
+		if (prop=="label"){
+			return edge.label
+		} else if (edge.properties.hasOwnProperty(prop)){
+			return edge.properties[prop].value
+		} else if (edge.properties.properties.hasOwnProperty(prop)){
+			return edge.properties.properties[prop].value
+		} else {
+			return ''
+		}
 	}
 
 	function add_checkbox_prop(item,selected_items){

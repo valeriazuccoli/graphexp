@@ -31,6 +31,11 @@
 		graphioGremlin.search_query();
 	}
 
+	function search_precomputed_query(){
+		//if (typeof graph_viz.simulation!=='undefined') {graph_viz.simulation.stop(); console.log('Simulation stopped!');}
+		graphioGremlin.search_precomputed_query();
+	}
+
 	function get_graph_info(){
 		graphioGremlin.get_graph_info();
 		infobox.show_element("#graphInfo");
@@ -78,7 +83,7 @@
 					</div>
 					<div class="nav input_unit_container">
 						<label for="limit_field">Results limit:</label>
-						<input name="limit_field" id="limit_field" value="50" min="1" max="1000" type="number"/>
+						<input name="limit_field" id="limit_field" value="5" min="1" max="100" type="number"/>
 					</div>
 				</div>
 				<div class="nav controls">
@@ -88,9 +93,33 @@
 			<div class="nav container" id="graph_bar">
 				<div class="nav inputs_container_bottom">
 					<div class="nav input_unit_container">
+						<label for="query_type">Select query:</label>
+						<select name="query_type" id="query_type">
+							<option value="merchants">Visualizza i 5 merchants che hanno il maggior numero di carte in comune con il merchant in ID_1</option>
+							<option value="cards">Visualizza le 5 carte che hanno il maggior numero di merchant in comune con la carta in ID_1</option>
+							<option value="two_merchants">Visualizza le carte in comune tra i merchant ID_1 e ID_2</option>
+							<option value="two_cards">Visualizza i merchants in comune tra le carte ID_1 e ID_2</option>
+						</select>
+					</div>
+					<div class="nav input_unit_container">
+						<label class="nav input_label" for="node_start">ID_1</label>
+						<input name="node_start" id="node_start" value="" />
+					</div>
+					<div class="nav input_unit_container">
+						<label class="nav input_label" for="node_end">ID_2</label>
+						<input name="node_end" id="node_end" value="" />
+					</div>
+				</div>
+				<div class="nav controls">
+					<button name="search query" onclick="$('#messageArea').html('<h3>(The query will be sent to server. Returned nodes and edges will be displayed in the graph area)</h3>');">Search</button>
+				</div>
+			</div>
+			<div class="nav container" id="graph_bar">
+				<div class="nav inputs_container_footer">
+					<!--div class="nav input_unit_container">
 						<label class="nav input_label" for="edge_filter">Traverse by edge:</label>
 						<input name="edge_filter" id="edge_filter" value="" />
-					</div>
+					</div-->
 					<div class="nav input_unit_container">
 						<label for="limit_traverse_field">Traverse limit:</label>
 						<input name="limit_traverse_field" id="limit_traverse_field" value="20" min="1" max="1000" type="number"/>
@@ -136,11 +165,11 @@
 				<div  class="aside" id="ImageInfo" style="background-color:transparent;">
 					<center><svg width="100" height="100"></svg></center>
 				</div>
-				-->
+			-->
 		</div>
 		<div class="footer">
 			<div class="container">
-				<div class="nav inputs_container_top">
+				<div class="nav inputs_container_footer">
 					<div class="nav input_unit_container">
 						<label class="nav input_label" for="server_address">Server Address:</label>
 						<input name="server_address" id="server_address" value="localhost" />
@@ -165,7 +194,7 @@
 							<option value="GraphSON2">3.2.*</option>
 						</select>
 					</div>
-					<div class="nav input_unit_container">
+					<!--div class="nav input_unit_container">
 						<button onclick="editGraph()" > Edit Graph </button>
 					</div>
 
@@ -238,12 +267,8 @@
 						 </table>
 					     <button class=Center" style="margin-top:1%" onclick="addEditEdge()"> Add/Edit Edge </button>
 					</div>
-					
-					
-
-
 			</div>
-				<a href="http://www.github.com/bricaud/graphexp">Graph Explorer V 0.8.0</a>
+				<a href="http://www.github.com/bricaud/graphexp">Graph Explorer V 0.8.0</a-->
 			</div>
 		</div>
 		<!-- INITIALIZATION -->

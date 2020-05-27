@@ -90,7 +90,7 @@ Layout styles
 .nav-bar
 {
 	color: #ddd;
-	background: #000;
+	background: #2D32AA;
 	padding: 0;
 }
 
@@ -108,11 +108,18 @@ Layout styles
 .nav.inputs_container_top {
 	grid-row: 1 / 2;
 	display: grid;
-	grid-template-columns: auto auto auto auto auto auto;
+	grid-template-columns: 19% auto auto auto auto auto;
 	grid-auto-flow: row;
 }
 
 .nav.inputs_container_bottom {
+	grid-row: 1 / 2;
+	display: grid;
+	grid-template-columns: 60% auto auto auto;
+	grid-auto-flow: row;
+}
+
+.nav.inputs_container_footer {
 	grid-row: 1 / 2;
 	display: grid;
 	grid-template-columns: auto auto auto auto auto;
@@ -177,7 +184,7 @@ Layout styles
 	bottom: 0;
 	width: 100%;
 	color: #fff;
-	background: #000;
+	background: #2D32AA;
 }
 
 /* -----------------------

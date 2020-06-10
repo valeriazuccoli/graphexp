@@ -418,8 +418,8 @@ var graphioGremlin = (function(){
 			_edge_properties = make_properties_list(data[3][0]);
 			change_nav_bar(_node_properties,_edge_properties);
 			display_color_choice(_node_properties,'nodes','Node color by:');
-			display_properties_bar(_node_properties,'nodes','Node properties:');
-			display_properties_bar(_edge_properties,'edges','Edge properties:');
+			// display_properties_bar(_node_properties,'nodes','Node properties:');
+			// display_properties_bar(_edge_properties,'edges','Edge properties:');
 		} else {
 			//console.log(data);
 			var graph = arrange_data(data);
